@@ -83,13 +83,12 @@ def bot(
             time.sleep(0.01)
             yield chatbot
 
-
 google_key_component = gr.Textbox(
-    label="GOOGLE API KEY",
-    value="",
+    # label="GOOGLE API KEY",
+    value="AIzaSyBmccPBmZavxweXuiRI1E4tICHsJzFMX9I",
     type="password",
-    placeholder="...",
-    info="You have to provide your own GOOGLE_API_KEY for this app to function properly",
+    # placeholder="...",
+    # info="You have to provide your own GOOGLE_API_KEY for this app to function properly",
 )
 
 image_prompt_component = gr.Image(type="pil", label="Image", scale=1)
