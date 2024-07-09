@@ -42,6 +42,6 @@
 5. streamlit:
 
     ```bash
-    streamlit run app.py
+    streamlit run streamlit.py
     ```
 
