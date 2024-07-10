@@ -3,25 +3,19 @@ import google.generativeai as genai
 import PIL
 import os
 import sqlite3
+
 from dotenv import load_dotenv
-
-from fastapi import FastAPI
-
-app = FastAPI()
-
-@app.get("/")
-async def root():
-    return {"message": "Hello World"}
-
 
 load_dotenv()  ## load all the environment variables
 # Replace with your API key
 # genai.configure(api_key='Enter your authentification tokens')
+# genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
 
-genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
+GOOGLE_API_KEY = 'AIzaSyBmccPBmZavxweXuiRI1E4tICHsJzFMX9I'
+
+genai.configure(api_key=GOOGLE_API_KEY)
 
 history = []
-
 
 
 ## Function to retrieve query from the sql database
