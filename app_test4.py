@@ -18,7 +18,6 @@ genai.configure(api_key=GOOGLE_API_KEY)
 
 history = []
 
-
 ## Function to retrieve query from the sql database
 
 def read_sql_query(sql, db):
@@ -140,5 +139,5 @@ iface = gr.TabbedInterface(
     tab_names=["Text", "Image", "Chat"],
     theme=theme
 )
-
-iface.launch(share=True, server_port=9500)  # you can change this parametres
+iface.launch()
+#iface.launch(share=True, server_port=9300)  # you can change this parametres
