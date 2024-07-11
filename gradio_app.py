@@ -33,8 +33,11 @@ prompt = [
 ]
 
 @app.get("/")
+
 def get_gemini_response(text, prompt):
-    model = genai.GenerativeModel('gemini-pro')
+    # model = genai.GenerativeModel(model_name="gemini-pro")
+    model = genai.GenerativeModel('gemini-1.0-pro-latest')
+
     response = model.generate_content([text, prompt])
     # print(response.text)
     return response.text
