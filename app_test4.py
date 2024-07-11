@@ -3,6 +3,7 @@ import google.generativeai as genai
 import PIL
 import os
 import sqlite3
+import json
 
 from dotenv import load_dotenv
 
@@ -48,12 +49,19 @@ prompt = [
 """
 ]
 
+
 def get_gemini_response(text, prompt):
     # global history
     model = genai.GenerativeModel('gemini-pro')
     # history.append(("User", text))
-    response = model.generate_content([text,prompt])
+    response = model.generate_content([text, prompt])
     # history.append(("Bot", response.text))
+    # print(response.text, response.)
+    # json_change = response.text
+    # f = open(f"{json_change}result_year_nation.json", encoding="UTF-8")
+    # raw_data = json.loads(str(json_change))
+    # print(type(response.text))
+    print(response.text)
     return response.text
     # return response.text,history
 
@@ -63,6 +71,7 @@ def generate_text(text):
     response = model.generate_content(text)
     return response.text
 
+
 def generate_text_from_image(image, text):
     global history
     model = genai.GenerativeModel('gemini-pro-vision')
@@ -71,6 +80,7 @@ def generate_text_from_image(image, text):
     response = model.generate_content([text, image])
     history.append(("Bot", response.text))
     return response.text, history
+
 
 def interactive_chat(message, chat_history=None):
     if chat_history is None:
@@ -86,6 +96,9 @@ def interactive_chat(message, chat_history=None):
 def greet(name):
     return "Hello " + name + "!"
 
+
+print("execute")
+
 with gr.Blocks() as demo:
     name = gr.Textbox(label="Name")
     output = gr.Textbox(label="Output Box")
@@ -93,17 +106,18 @@ with gr.Blocks() as demo:
     greet_btn.click(fn=greet, inputs=name, outputs=output)
 
 # Using the specified Gradio theme
-theme =theme = gr.themes.Soft()
+theme = theme = gr.themes.Soft()
 
 # Creating interfaces with the specified theme
 text_interface = gr.Interface(
     # fn=generate_text,
-    fn= get_gemini_response,
-    inputs=[gr.components.Textbox(label="Enter text"),gr.components.Textbox(visible=False)],
+    fn=get_gemini_response,
+    inputs=[gr.components.Textbox(label="Enter text"), gr.components.Textbox(visible=False)],
     outputs=gr.components.Textbox(label="Generated Text"),
 
     theme=theme
 )
+
 
 
 image_interface = gr.Interface(
@@ -127,8 +141,4 @@ iface = gr.TabbedInterface(
     theme=theme
 )
 
-
-
-
-iface.launch(share=True,server_port=7865) # you can change this parametres
-
+iface.launch(share=True, server_port=9500)  # you can change this parametres
